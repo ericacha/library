@@ -5,6 +5,7 @@
             private $id;
 
 
+
             function __construct($name,$id = null)
             {
                 $this->name = $name;
@@ -38,6 +39,12 @@
                 $this->setId($result['id']);
             }
 
+            function updateName($new_name)
+            {
+                $GLOBALS['DB']->exec("UPDATE authors SET name = '{$new_name}' WHERE id = {$this->getId()} ;");
+                $this->setName($new_name);
+                }
+
             static function getAll()
             {
                 $statement = $GLOBALS['DB']->query("SELECT * FROM authors;");
@@ -59,6 +66,8 @@
             {
                 $GLOBALS['DB']->exec("DELETE FROM authors *;");
             }
+
+
 
     }
 

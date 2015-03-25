@@ -127,10 +127,30 @@
 
             //Act
             Author::deleteAll();
-            $result = Author::getAll(); 
+            $result = Author::getAll();
 
             //Assert
             $this->assertEquals([], $result);
+        }
+
+        function test_update()
+        {
+            //Arrange
+            $name = "Lightning McQueen";
+            $id = 4;
+            $test_author = new Author($name, $id);
+            $test_author->save();
+            $new_name = "Red car";
+
+            //Act
+            $test_author->updateName($new_name);
+            $result = $test_author->getName();
+
+
+            //Assert
+            $this->assertEquals('Red car', $result);
+
+
         }
 }
 
