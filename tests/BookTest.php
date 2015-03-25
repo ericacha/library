@@ -62,6 +62,38 @@
 
         }
 
+        function test_setTitle()
+        {
+            //Arrange
+            $author = "J.K. Rowling";
+            $title = "Harry Potter";
+            $id = null;
+            $test_book = new Book($author, $title, $id);
+            $new_title = "Chamber of Secrets";
+
+            //Act
+            $test_book->setTitle($new_title);
+            $result = $test_book->getTitle();
+
+            //Assert
+            $this->assertEquals("Chamber of Secrets", $result);
+        }
+
+        function test_getId()
+        {
+            //Arrange
+            $author = "J.K. Rowling";
+            $title = "Prisoner of Azkaban";
+            $id = 1;
+            $test_book = new Book($author, $title, $id);
+
+            //Act
+            $result = $test_book->getId();
+
+            //Assert
+            $this->assertEquals(1, $result);
+        }
+
 
     }
 
