@@ -94,6 +94,23 @@
             $this->assertEquals(1, $result);
         }
 
+        function test_setId()
+        {
+            //Arrange
+            $author = "J.K. Rowling";
+            $title = "Prisoner of Azkaban";
+            $id = 1;
+            $test_book = new Book($author, $title, $id);
+            $new_id = 2;
+
+            //Act
+            $test_book->setId($new_id);
+            $result = $test_book->getId();
+
+            //Assert
+            $this->assertEquals(2, $result);
+        }
+
 
     }
 
