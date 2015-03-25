@@ -58,7 +58,11 @@ class Book
             $this->setAuthor($new_author);
         }
 
-
+        function updateTitle($new_title)
+        {
+            $GLOBALS['DB']->exec("UPDATE book SET title = '{$new_title}';");
+            $this->setTitle($new_title);
+        }
 
 
 
@@ -104,6 +108,8 @@ class Book
             }
             return $return_book;
         }
+
+
 
 
 

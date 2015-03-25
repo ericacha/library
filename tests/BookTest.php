@@ -17,6 +17,42 @@
 
         }
 
+        function test_updateAuthor()
+        {
+            //arrange
+            $author = "Yo Man";
+            $title = "Johnny Boy";
+            $id = 1;
+            $test_book = new Book($author, $title, $id);
+            $test_book->save();
+
+            //act
+            $new_author = "Brian Kropff";
+            $test_book->updateAuthor($new_author);
+            $result = $test_book->getAuthor();
+
+            //assert
+            $this->assertEquals("Brian Kropff", $result);
+        }
+
+        function test_UpdateAuthorDatabase()
+        {
+            //arrange
+            $author = "Tolkien";
+            $title = "LoTR";
+            $test_book = new Book($author, $title);
+            $test_book->save();
+            $new_author = "J.R.R";
+
+            //act
+            $test_book->updateAuthor($new_author);
+            $all_books = Book::getAll();
+            $result = $all_books[0]->getAuthor();
+
+            //asert
+            $this->assertEquals("J.R.R", $result);
+        }
+
         function test_getAuthorName()
         {
             //Arrange
@@ -200,41 +236,48 @@
             $this->assertEquals($test_book2, $result);
         }
 
-        function test_updateAuthor()
+        function test_updateTitle()
         {
-            //arrange
-            $author = "Yo Man";
-            $title = "Johnny Boy";
+            //Arrange
+            $author = "Miriam King";
+            $title = "Roses Are Red";
             $id = 1;
             $test_book = new Book($author, $title, $id);
             $test_book->save();
 
-            //act
-            $new_author = "Brian Kropff";
-            $test_book->updateAuthor($new_author);
-            $result = $test_book->getAuthor();
+            //Act
+            $new_title = "Roses Are Blue";
+            $test_book->updateTitle($new_title);
+            $result = $test_book->getTitle();
 
-            //assert
-            $this->assertEquals("Brian Kropff", $result);
+            //Assert
+            $this->assertEquals("Roses Are Blue", $result);
+
+
         }
 
-        function test_UpdateAuthorDatabase()
+        function test_updateTitleDatabase()
         {
-            //arrange
-            $author = "Tolkien";
-            $title = "LoTR";
-            $test_book = new Book($author, $title);
+            //Arrange
+            $author = "Miriam King";
+            $title = "Roses Are Red";
+            $id = 1;
+            $test_book = new Book($author, $title, $id);
             $test_book->save();
-            $new_author = "J.R.R";
 
-            //act
-            $test_book->updateAuthor($new_author);
-            $all_books = Book::getAll();
-            $result = $all_books[0]->getAuthor();
+            //Act
+            $new_title = "Roses Are Blue";
+            $test_book->updateTitle($new_title);
+            $result = Book::getAll();
+            $get_newTitle = $result[0]->getTitle();
 
-            //asert
-            $this->assertEquals("J.R.R", $result);
+            //Assert
+            $this->assertEquals('Roses Are Blue', $get_newTitle);
         }
+
+
+
+
 
     }
 
