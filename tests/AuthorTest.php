@@ -171,6 +171,23 @@
             //Assert
             $this->assertEquals($test_author1, $result);
         }
+
+        function test_findName()
+        {
+            //Arrange
+            $name = "C.S. Lewis";
+            $test_author = new Author($name);
+            $test_author->save();
+
+            $name1 = "Thomas Pynchon";
+            $test_author1 = new Author($name);
+            $test_author1->save();
+            $search_name = $test_author1->getName();
+
+            $result = Author::findName($search_name);
+
+            $this->assertEquals($test_author1, $result);
+        }
 }
 
 

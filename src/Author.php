@@ -61,6 +61,24 @@
                 return $found_author;
             }
 
+
+            // An author can have many books. Might need to change $found_name to an array
+            static function findName($search_name)
+            {
+                $statement = $GLOBALS['DB']->query("SELECT * FROM authors WHERE name = '{$search_name}';");
+                $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $found_name = null;
+
+                foreach($results as $name)
+                {
+                    $new_name = $name['name'];
+                    $new_id = $name['id'];
+                    $found_name = new Author($new_name, $new_id);
+                }
+                return $found_name;
+
+            }
+
             static function getAll()
             {
                 $statement = $GLOBALS['DB']->query("SELECT * FROM authors;");
