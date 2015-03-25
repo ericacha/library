@@ -69,5 +69,10 @@ class Book
         return $return_array;
         }
 
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM book *;");
+        }
+
 }
 ?>

@@ -11,6 +11,11 @@
 
     class BookTest extends PHPUnit_Framework_TestCase
     {
+        protected function tearDown()
+        {
+            Book::deleteAll();
+
+        }
 
         function test_getAuthorName()
         {
@@ -124,7 +129,7 @@
             $result = Book::getAll();
 
             //Assert
-            $this->assertEquals($test_book ,$result );
+            $this->assertEquals([$test_book] ,$result );
 
 
         }
@@ -148,6 +153,28 @@
 
             //Assert
             $this->assertEquals([$test_book,$test_book2], $result);
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $author = "Yo Man";
+            $title = "Johnny Boy";
+            $id = 1;
+            $test_book = new Book($author, $title, $id);
+            $test_book->save();
+
+            $author2 = "R.L Stine";
+            $title2 = "Scary Boo";
+            $test_book2 = new Book($author2, $title2);
+            $test_book2->save();
+
+            //Act
+            Book::deleteAll();
+            $result = Book::getALL();
+
+            //Assert
+            $this->assertEquals([], $result);
         }
 
 
