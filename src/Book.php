@@ -74,5 +74,22 @@ class Book
             $GLOBALS['DB']->exec("DELETE FROM book *;");
         }
 
+        static function findId($search_id)
+        {
+            $statement = $GLOBALS['DB']->query("SELECT * FROM book WHERE id = {$search_id};");
+            $book_array = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $return_book = null;
+
+            foreach ($book_array as $book)
+            {
+                $author = $book['author'];
+                $title = $book['title'];
+                $id = $book['id'];
+                $return_book = new Book($author, $title, $id);
+
+            }
+            return $return_book;
+        }
+
 }
 ?>

@@ -178,6 +178,27 @@
         }
 
 
+        function test_findId()
+        {
+            $author = "Yo Man";
+            $title = "Johnny Boy";
+            $id = 1;
+            $test_book = new Book($author, $title, $id);
+            $test_book->save();
+
+            $author2 = "Cool";
+            $title2 = "Dude Guide";
+            $id2 = 2;
+            $test_book2 = new Book($author2,$title2, $id2);
+            $test_book2->save();
+
+            //Act
+            $result = Book::findID($test_book2->getID());
+
+            //Assert
+            $this->assertEquals($test_book2, $result);
+        }
+
     }
 
 
