@@ -180,6 +180,7 @@
 
         function test_findId()
         {
+            //arrange
             $author = "Yo Man";
             $title = "Johnny Boy";
             $id = 1;
@@ -197,6 +198,42 @@
 
             //Assert
             $this->assertEquals($test_book2, $result);
+        }
+
+        function test_updateAuthor()
+        {
+            //arrange
+            $author = "Yo Man";
+            $title = "Johnny Boy";
+            $id = 1;
+            $test_book = new Book($author, $title, $id);
+            $test_book->save();
+
+            //act
+            $new_author = "Brian Kropff";
+            $test_book->updateAuthor($new_author);
+            $result = $test_book->getAuthor();
+
+            //assert
+            $this->assertEquals("Brian Kropff", $result);
+        }
+
+        function test_UpdateAuthorDatabase()
+        {
+            //arrange
+            $author = "Tolkien";
+            $title = "LoTR";
+            $test_book = new Book($author, $title);
+            $test_book->save();
+            $new_author = "J.R.R";
+
+            //act
+            $test_book->updateAuthor($new_author);
+            $all_books = Book::getAll();
+            $result = $all_books[0]->getAuthor();
+
+            //asert
+            $this->assertEquals("J.R.R", $result);
         }
 
     }

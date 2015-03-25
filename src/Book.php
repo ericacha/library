@@ -52,6 +52,20 @@ class Book
             $this->setId($result['id']);
         }
 
+        function updateAuthor($new_author)
+        {
+            $GLOBALS['DB']->exec("UPDATE book SET author = '{$new_author}';");
+            $this->setAuthor($new_author);
+        }
+
+
+
+
+
+
+
+
+
         static function getAll()
         {
             $statement = $GLOBALS['DB']->query("SELECT * FROM book;");
@@ -90,6 +104,8 @@ class Book
             }
             return $return_book;
         }
+
+
 
 }
 ?>
