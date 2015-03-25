@@ -59,6 +59,21 @@
 
         }
 
+        function test_setId()
+        {
+            //Arrange
+            $name = "Lois Rain";
+            $id = 1;
+            $test_author = new Author($name, $id);
+            $new_id = 2;
+
+            //Act
+            $test_author->setId($new_id);
+            $result = $test_author->getId();
+
+            //Arrange
+            $this->assertEquals(2, $result);
+        }
 }
 
 
