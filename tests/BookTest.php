@@ -1,15 +1,15 @@
 <?php
 
     /**
-    * @BackupGlobals disabled
-    * @BackupStaticAttributes disabled
+    * @backupGlobals disabled
+    * @backupStaticAttributes disabled
     */
 
     require_once "src/Book.php";
 
-    // $DB = new PDO('pgsql:host=localhost;dbname=Library');
+    $DB = new PDO('pgsql:host=localhost;dbname=library_test');
 
-    Class BookTest extends PHPUnit_Framework_TestCase
+    class BookTest extends PHPUnit_Framework_TestCase
     {
 
         function test_getAuthorName()
@@ -109,6 +109,45 @@
 
             //Assert
             $this->assertEquals(2, $result);
+        }
+
+        function test_save()
+        {
+            //Arrange
+            $author = "Dr. Suess";
+            $title = "Hop On Pop";
+            $id = 1;
+            $test_book = new Book($author, $title, $id);
+            $test_book->save();
+
+            //Act
+            $result = Book::getAll();
+
+            //Assert
+            $this->assertEquals($test_book ,$result );
+
+
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $author = "Dr. Suess";
+            $title = "Hop On Pop";
+            $id = 1;
+            $test_book = new Book($author, $title, $id);
+            $test_book->save();
+
+            $author2 = "R.L Stine";
+            $title2 = "Scary Boo";
+            $test_book2 = new Book($author2, $title2);
+            $test_book2->save();
+
+            //Act
+            $result = Book::getAll();
+
+            //Assert
+            $this->assertEquals([$test_book,$test_book2], $result);
         }
 
 
