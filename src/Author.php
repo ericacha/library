@@ -45,6 +45,22 @@
                 $this->setName($new_name);
                 }
 
+            static function findId($search_id)
+            {
+
+                $statement = $GLOBALS['DB']->query("SELECT *  FROM authors WHERE id = {$search_id};");
+                $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $found_author = null;
+
+                foreach($results as $element)
+                {
+                    $new_id = $element['id'];
+                    $new_name = $element['name'];
+                    $found_author = new Author($new_name, $new_id);
+                }
+                return $found_author;
+            }
+
             static function getAll()
             {
                 $statement = $GLOBALS['DB']->query("SELECT * FROM authors;");

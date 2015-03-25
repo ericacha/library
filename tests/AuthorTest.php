@@ -133,7 +133,7 @@
             $this->assertEquals([], $result);
         }
 
-        function test_update()
+        function test_updateName()
         {
             //Arrange
             $name = "Lightning McQueen";
@@ -147,10 +147,29 @@
             $result = $test_author->getName();
 
 
-            //Assert
+            //Assertåå
             $this->assertEquals('Red car', $result);
 
 
+        }
+
+        function test_findId()
+        {
+            //Arrange
+            $name = "Heavy Mater";
+            $test_author = new Author($name, 1);
+            $test_author->save();
+
+            $name1 = "Dark Matter";
+            $test_author1 = new Author($name, 2);
+            $test_author1->save();
+
+            $search_id= $test_author1->getId();
+
+            //Act
+            $result = Author::findId($search_id);
+            //Assert
+            $this->assertEquals($test_author1, $result);
         }
 }
 
