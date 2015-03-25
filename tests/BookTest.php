@@ -45,6 +45,24 @@
             //assert
             $this->assertEquals("Jonathan Lin", $result);
         }
+
+        function test_getTitle()
+        {
+            //Arrange
+            $author = "Erica Cha";
+            $title = "Charlotte's Web";
+            $id = null;
+            $test_book = new Book($author, $title, $id);
+
+            //Act
+            $result = $test_book->getTitle();
+
+            //Assert
+            $this->assertEquals("Charlotte's Web", $result);
+
+        }
+
+
     }
 
 
