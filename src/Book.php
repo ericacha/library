@@ -47,23 +47,27 @@ class Book
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO book(author,title) VALUES ('{$this->getAuthor()}', '{$this->getTitle()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO books(author,title) VALUES ('{$this->getAuthor()}', '{$this->getTitle()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
 
         function updateAuthor($new_author)
         {
-            $GLOBALS['DB']->exec("UPDATE book SET author = '{$new_author}';");
+            $GLOBALS['DB']->exec("UPDATE books SET author = '{$new_author}';");
             $this->setAuthor($new_author);
         }
 
         function updateTitle($new_title)
         {
-            $GLOBALS['DB']->exec("UPDATE book SET title = '{$new_title}';");
+            $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}';");
             $this->setTitle($new_title);
         }
 
+        function singleDelete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
+        }
 
 
 
@@ -72,7 +76,7 @@ class Book
 
         static function getAll()
         {
-            $statement = $GLOBALS['DB']->query("SELECT * FROM book;");
+            $statement = $GLOBALS['DB']->query("SELECT * FROM books;");
             $book_array = $statement->fetchAll(PDO::FETCH_ASSOC);
             $return_array = array();
 
@@ -89,12 +93,12 @@ class Book
 
         static function deleteAll()
         {
-            $GLOBALS['DB']->exec("DELETE FROM book *;");
+            $GLOBALS['DB']->exec("DELETE FROM books *;");
         }
 
         static function findId($search_id)
         {
-            $statement = $GLOBALS['DB']->query("SELECT * FROM book WHERE id = {$search_id};");
+            $statement = $GLOBALS['DB']->query("SELECT * FROM books WHERE id = {$search_id};");
             $book_array = $statement->fetchAll(PDO::FETCH_ASSOC);
             $return_book = null;
 
@@ -108,6 +112,9 @@ class Book
             }
             return $return_book;
         }
+
+
+
 
 
 

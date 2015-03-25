@@ -275,6 +275,24 @@
             $this->assertEquals('Roses Are Blue', $get_newTitle);
         }
 
+        function test_singleDelete()
+        {
+            //Arrange
+            $author = "Joe Smith";
+            $title = "Bad gum";
+            $id = 1;
+            $test_book = new Book($author, $title, $id);
+            $test_book->save();
+
+            //Act
+
+            $test_book->singleDelete();
+            $result = Book::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
 
 
 
