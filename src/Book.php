@@ -113,6 +113,21 @@ class Book
             return $return_book;
         }
 
+        static function findByTitle($search_title)
+        {
+            $statement_pdo = $GLOBALS['DB']->query("SELECT * FROM books WHERE title = '{$search_title}';");
+            $statement = $statement_pdo->fetchAll(PDO::FETCH_ASSOC);
+            $return_book = null;
+
+            foreach ($statement as $book)
+            {
+                $new_title = $book['title'];
+                $new_author = $book['author'];
+                $new_id = $book['id'];
+                $return_book = new Book($new_author, $new_title, $new_id);
+            }
+            return $return_book;
+        }
 
 
 

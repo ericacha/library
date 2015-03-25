@@ -293,7 +293,27 @@
             $this->assertEquals([], $result);
         }
 
+        function test_findByTitle()
+        {
+            //Arrange
+            $author = "F.Scott Fizgerald";
+            $title = "Great Gatsby";
+            $test_book = new Book($author, $title);
+            $test_book->save();
 
+            $author1 = "Anne Rice";
+            $title1 = "Whatever";
+            $test_book1 = new Book($author1, $title1);
+            $test_book1->save();
+
+            $title_search = "Whatever";
+
+            //Act
+            $result = Book::findByTitle($title_search);
+
+            //Assert
+            $this->assertEquals($test_book1, $result);
+        }
 
 
 
