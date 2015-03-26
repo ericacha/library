@@ -134,6 +134,24 @@
 
         }
 
+        function test_updatePatron()
+        {
+            //Arrange
+            $patron_name = "Lucky";
+            $id = 1;
+            $test_patron = new Patron($patron_name, $id);
+            $test_patron->save();
+
+            //Act
+            $new_patron_name= "Daisy";
+            $test_patron->updatePatron($new_patron_name);
+            $result = Patron::getAll();
+
+
+            //Assert
+            $this->assertEquals('Daisy',$result[0]->getPatronName());
+        }
+
     }
 
 ?>

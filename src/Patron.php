@@ -20,7 +20,7 @@
 
         function setPatronName($new_patron_name)
         {
-            $this->$patron_name = (string) $new_patron_name;
+            $this->patron_name = (string) $new_patron_name;
         }
 
         function getId()
@@ -62,6 +62,11 @@
         }
 
 
+        function updatePatron($new_patron_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE patrons SET patron_name = '{$new_patron_name}';");
+            $this->setPatronName($new_patron_name);
+        }
 
 
 
