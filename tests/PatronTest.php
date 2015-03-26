@@ -28,14 +28,21 @@
 
         }
 
-        // function setPatronName()
-        // {
-        //     //Assert
-        //     $name = "Loral";
-        //     $id = null;
-        //     $test_patron = new Patron($name, $id);
-        //
-        // }
+        function setPatronName()
+        {
+            //Assert
+            $patron_name = "Loral";
+            $id = null;
+            $test_patron = new Patron($patron_name, $id);
+            $new_patron_name = "Kim";
+
+            //Act
+            $test_patron = setPatronName($new_patron_name);
+            $result = $test_patron->getPatronName();
+
+            //Assert
+            $this->assertEquals($test_patron, $result);
+        }
     }
 
 ?>
