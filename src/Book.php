@@ -51,7 +51,37 @@
             function singleDelete()
             {
                 $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
+                $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE id = {$this->getId()};");
+
             }
+
+
+            function addAuthor($author)
+            {
+                var_dump($author);
+                $GLOBALS['DB']->exec("INSERT INTO authors_books (authors_id, books_id) VALUES ({$author->getId()}, {$this->getId()});");
+            }
+
+
+
+            function getAuthors()
+            {
+                $query = $GLOBALS['DB']->query("SELECT authors.* FROM books JOIN authors_books ON (authors_books.books_id = books.id) JOIN authors ON (authors_books.authors_id = authors.id) WHERE books.id = {$this->getId()};");
+                $query_fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+                $array1 = array();
+
+                foreach ($query_fetch as $element)
+                {
+                    $new_name = $element['name'];
+                    $new_id = $element['id'];
+                    $new_author = new Author($new_name, $new_id);
+                    array_push($array1, $new_author);
+                }
+                return $array1;
+
+            }
+
+
 
             static function getAll()
             {
@@ -103,6 +133,8 @@
                 }
                 return $return_book;
             }
+
+
 
 
 
