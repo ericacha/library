@@ -180,13 +180,13 @@
             $test_author->save();
 
             $name1 = "Thomas Pynchon";
-            $test_author1 = new Author($name);
+            $test_author1 = new Author($name1);
             $test_author1->save();
             $search_name = $test_author1->getName();
 
             $result = Author::findName($search_name);
 
-            $this->assertEquals($test_author1, $result);
+            $this->assertEquals([$test_author1], $result);
         }
 
         function test_singleDelete()

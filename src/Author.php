@@ -72,15 +72,16 @@
             {
                 $statement = $GLOBALS['DB']->query("SELECT * FROM authors WHERE name = '{$search_name}';");
                 $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-                $found_name = null;
+                $found_name_array = array();
 
                 foreach($results as $name)
                 {
                     $new_name = $name['name'];
                     $new_id = $name['id'];
                     $found_name = new Author($new_name, $new_id);
+                    array_push($found_name_array, $found_name);
                 }
-                return $found_name;
+                return $found_name_array;
 
             }
 
