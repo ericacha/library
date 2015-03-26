@@ -58,7 +58,8 @@
 
             function addAuthor($author)
             {
-                var_dump($author);
+                // var_dump($author);
+                // var_dump($author->getId());
                 $GLOBALS['DB']->exec("INSERT INTO authors_books (authors_id, books_id) VALUES ({$author->getId()}, {$this->getId()});");
             }
 
@@ -102,6 +103,9 @@
             static function deleteAll()
             {
                 $GLOBALS['DB']->exec("DELETE FROM books *;");
+                $GLOBALS['DB']->exec("DELETE FROM authors_books *;");
+
+
             }
 
             static function findId($search_id)

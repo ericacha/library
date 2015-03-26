@@ -29,7 +29,7 @@
 
             function setId($new_id)
             {
-                $this->id = $new_id;
+                $this->id = (int) $new_id;
             }
 
             function save()
@@ -48,6 +48,27 @@
             function singleDelete()
             {
                 $GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()};");
+            }
+
+            function addBook($title)
+            {
+                $GLOBALS['DB']->exec("INSERT INTO authors_books(authors_id, books_id) VALUES  ({$this->getId()},{$title->getId()});");
+            }
+
+            function getBooks()
+            {
+                $query = $GLOBALS['DB']->query("SELECT books.* FROM books JOIN authors_books ON (books.id = authors_books.books_id) JOIN authors ON( authors.id = authors_books.authors_id) WHERE authors.id = {$this->getId()};");
+                $query_fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+                $array1 = array();
+
+                foreach ($query_fetch as $element)
+                {
+                    $new_id = $element['id'];
+                    $new_title = $element['title'];
+                    $new_book = new Book($new_title, $new_id);
+                    array_push ($array1, $new_book);
+                }
+                return $array1;
             }
 
             static function findId($search_id)
@@ -105,6 +126,8 @@
             static function deleteAll()
             {
                 $GLOBALS['DB']->exec("DELETE FROM authors *;");
+                $GLOBALS['DB']->exec("DELETE FROM authors_books *;");
+
             }
 
 

@@ -6,6 +6,7 @@
     */
 
     require_once "src/Author.php";
+    require_once "src/Book.php";
 
     $DB = new PDO('pgsql:host=localhost;dbname=library_test');
 
@@ -15,6 +16,7 @@
         protected function tearDown()
         {
             Author::deleteAll();
+            Book::deleteAll();
         }
 
         function test_getName()
@@ -210,7 +212,51 @@
             $this->assertEquals([$test_author], $result);
 
         }
-}
+        function test_addBook()
+        {
+            //Arrange
+            $name = "Ryan Gosling";
+            $test_author = new Author($name);
+            $test_author->save();
+
+            $title = "Lady Luck";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            //Act
+            $test_author->addBook($test_book);
+            $result = $test_author->getBooks();
+
+            //Assert
+            $this->assertEquals($test_book, $result[0]);
+       }
+
+       function test_getBooks()
+       {
+           //Arrnage
+           $name = "Ryan Gosling";
+           $test_author = new Author($name);
+           $test_author->save();
+
+           $title= "Red Riding Hood";
+           $test_book = new Book($title);
+           $test_book->save();
+
+           $title1 = "Robin Hood";
+           $test_book1 = new Book($title1);
+           $test_book1->save();
+
+           //Act
+           $test_author->addBook($test_book);
+           $test_author->addBook($test_book1);
+           $result = $test_author->getBooks();
+
+           //Assert
+           $this->assertEquals([$test_book, $test_book1], $result);
+
+
+       }
+   }
 
 
 
