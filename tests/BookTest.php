@@ -17,83 +17,14 @@
 
         }
 
-        function test_updateAuthor()
-        {
-            //arrange
-            $author = "Yo Man";
-            $title = "Johnny Boy";
-            $id = 1;
-            $test_book = new Book($author, $title, $id);
-            $test_book->save();
-
-            //act
-            $new_author = "Brian Kropff";
-            $test_book->updateAuthor($new_author);
-            $result = $test_book->getAuthor();
-
-            //assert
-            $this->assertEquals("Brian Kropff", $result);
-        }
-
-        function test_UpdateAuthorDatabase()
-        {
-            //arrange
-            $author = "Tolkien";
-            $title = "LoTR";
-            $test_book = new Book($author, $title);
-            $test_book->save();
-            $new_author = "J.R.R";
-
-            //act
-            $test_book->updateAuthor($new_author);
-            $all_books = Book::getAll();
-            $result = $all_books[0]->getAuthor();
-
-            //asert
-            $this->assertEquals("J.R.R", $result);
-        }
-
-        function test_getAuthorName()
-        {
-            //Arrange
-            $author = "Jane Olstin";
-            $title = "Pride and Prejudice";
-            $id = null;
-            $test_book = new Book($author, $title, $id);
-
-            //Act
-            $result = $test_book->getAuthor();
-
-            //Assert
-            $this->assertEquals("Jane Olstin", $result);
-
-        }
-
-
-        function test_setAuthorName()
-        {
-            //Arrange
-            $author = "Erica Cha";
-            $title = "Charlotte's Web";
-            $id = null;
-            $test_book = new Book($author, $title, $id);
-            $new_author = "Jonathan Lin";
-
-            //act
-            $test_book->setAuthor($new_author);
-            $result = $test_book->getAuthor();
-
-            //assert
-            $this->assertEquals("Jonathan Lin", $result);
-        }
 
         function test_getTitle()
         {
             //Arrange
-            $author = "Erica Cha";
+
             $title = "Charlotte's Web";
             $id = null;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
 
             //Act
             $result = $test_book->getTitle();
@@ -106,10 +37,9 @@
         function test_setTitle()
         {
             //Arrange
-            $author = "J.K. Rowling";
             $title = "Harry Potter";
             $id = null;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
             $new_title = "Chamber of Secrets";
 
             //Act
@@ -123,10 +53,10 @@
         function test_getId()
         {
             //Arrange
-            $author = "J.K. Rowling";
+
             $title = "Prisoner of Azkaban";
             $id = 1;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
 
             //Act
             $result = $test_book->getId();
@@ -138,10 +68,10 @@
         function test_setId()
         {
             //Arrange
-            $author = "J.K. Rowling";
+
             $title = "Prisoner of Azkaban";
             $id = 1;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
             $new_id = 2;
 
             //Act
@@ -155,10 +85,9 @@
         function test_save()
         {
             //Arrange
-            $author = "Dr. Suess";
             $title = "Hop On Pop";
             $id = 1;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             //Act
@@ -173,15 +102,15 @@
         function test_getAll()
         {
             //Arrange
-            $author = "Dr. Suess";
+
             $title = "Hop On Pop";
             $id = 1;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
-            $author2 = "R.L Stine";
+
             $title2 = "Scary Boo";
-            $test_book2 = new Book($author2, $title2);
+            $test_book2 = new Book($title2);
             $test_book2->save();
 
             //Act
@@ -194,15 +123,15 @@
         function test_deleteAll()
         {
             //Arrange
-            $author = "Yo Man";
+
             $title = "Johnny Boy";
             $id = 1;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
-            $author2 = "R.L Stine";
+
             $title2 = "Scary Boo";
-            $test_book2 = new Book($author2, $title2);
+            $test_book2 = new Book($title2);
             $test_book2->save();
 
             //Act
@@ -217,16 +146,16 @@
         function test_findId()
         {
             //arrange
-            $author = "Yo Man";
+
             $title = "Johnny Boy";
             $id = 1;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
-            $author2 = "Cool";
+
             $title2 = "Dude Guide";
             $id2 = 2;
-            $test_book2 = new Book($author2,$title2, $id2);
+            $test_book2 = new Book($title2, $id2);
             $test_book2->save();
 
             //Act
@@ -239,10 +168,10 @@
         function test_updateTitle()
         {
             //Arrange
-            $author = "Miriam King";
+
             $title = "Roses Are Red";
             $id = 1;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             //Act
@@ -259,10 +188,10 @@
         function test_updateTitleDatabase()
         {
             //Arrange
-            $author = "Miriam King";
+
             $title = "Roses Are Red";
             $id = 1;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             //Act
@@ -278,10 +207,9 @@
         function test_singleDelete()
         {
             //Arrange
-            $author = "Joe Smith";
             $title = "Bad gum";
             $id = 1;
-            $test_book = new Book($author, $title, $id);
+            $test_book = new Book($title, $id);
             $test_book->save();
 
             //Act
@@ -296,14 +224,13 @@
         function test_findByTitle()
         {
             //Arrange
-            $author = "F.Scott Fizgerald";
+
             $title = "Great Gatsby";
-            $test_book = new Book($author, $title);
+            $test_book = new Book($title);
             $test_book->save();
 
-            $author1 = "Anne Rice";
             $title1 = "Whatever";
-            $test_book1 = new Book($author1, $title1);
+            $test_book1 = new Book($title1);
             $test_book1->save();
 
             $title_search = "Whatever";
