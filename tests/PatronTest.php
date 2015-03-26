@@ -58,6 +58,22 @@
             $this->assertEquals(1, $result);
         }
 
+        function test_setId()
+        {
+            //Assert
+            $patron_name = "Lisa";
+            $id = 1;
+            $test_patron = new Patron($patron_name, $id);
+            $new_id = 5;
+
+            //Act
+            $test_patron->setId($new_id);
+            $result = $test_patron->getId();
+
+            //Assert
+            $this->assertEquals(5, $result);
+        }
+
 
     }
 
