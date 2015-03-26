@@ -45,6 +45,11 @@
                 $this->setName($new_name);
                 }
 
+            function singleDelete()
+            {
+                $GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()};");
+            }
+
             static function findId($search_id)
             {
 
@@ -100,6 +105,8 @@
             {
                 $GLOBALS['DB']->exec("DELETE FROM authors *;");
             }
+
+
 
 
 

@@ -188,6 +188,27 @@
 
             $this->assertEquals($test_author1, $result);
         }
+
+        function test_singleDelete()
+        {
+            //Arrange
+            $name = "Ryan Smith";
+            $test_author = new Author($name);
+            $test_author->save();
+
+            $name2 = "Dana Snow";
+            $test_author2 = new Author($name2);
+            $test_author2->save();
+
+            //Act
+            $test_author2->singleDelete();
+            $result = Author::getAll();
+
+
+            //Assert
+            $this->assertEquals([$test_author], $result);
+
+        }
 }
 
 
