@@ -20,9 +20,18 @@
 
         function setPatronName($new_patron_name)
         {
-            $this->$patron_name = $new_patron_name;
+            $this->$patron_name = (string) $new_patron_name;
         }
 
+        function getId()
+        {
+            return $this->id;
+        }
+
+        function setId($new_id)
+        {
+            $this->$id = (int) $new_id;
+        }
 
 
 
