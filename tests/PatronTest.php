@@ -11,6 +11,10 @@
 
     class PatronTest extends PHPUnit_Framework_TestCase
     {
+        protected function tearDown()
+        {
+            Patron::deleteAll();
+        }
 
 
         function test_getPatronName()
@@ -74,6 +78,61 @@
             $this->assertEquals(5, $result);
         }
 
+        function test_save()
+        {
+            //Assert
+            $patron_name = "William";
+            $id = 1;
+            $test_patron = new Patron($patron_name, $id);
+            $test_patron->save();
+
+            //Act
+            $result = Patron::getAll();
+
+            //Assert
+            $this->assertEquals([$test_patron], $result);
+        }
+
+        function test_getAll()
+        {
+            $patron_name = "Cassidy";
+            $id = 2;
+            $test_patron = new Patron($patron_name, $id);
+            $test_patron->save();
+
+            $patron_name1 = "Noel";
+            $id1 = 3;
+            $test_patron1 = new Patron($patron_name1, $id1);
+            $test_patron1->save();
+
+            //Act
+            $result = Patron::getAll();
+
+            //Assert
+            $this->assertEquals([$test_patron, $test_patron1], $result);
+        }
+
+        function test_deleteAll()
+        {
+            $patron_name = "Kels";
+            $id = 1;
+            $test_patron = new Patron($patron_name,$id);
+            $test_patron->save();
+
+            $patron_name2 = "Luke";
+            $id2= 2;
+            $test_patron2 = new Patron($patron_name2, $id2);
+            $test_patron2->save();
+
+            //Act
+            Patron::deleteAll();
+            $result = $test_patron->getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+
+
+        }
 
     }
 
